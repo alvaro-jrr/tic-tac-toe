@@ -82,6 +82,7 @@ bool Board::isWinner(char token) {
 
 			// verificar posible secuencia horizontal ( - )
 			if (
+				isColumnInRange(col + 2) &&
 				board[row][col + 1] == token &&
 				board[row][col + 2] == token
 			) {
@@ -90,6 +91,7 @@ bool Board::isWinner(char token) {
 
 			// verificar posible secuencia vertical ( | )
 			if (
+				isRowInRange(row + 2) &&
 				board[row + 1][col] == token &&
 				board[row + 2][col] == token
 			) {
@@ -98,6 +100,8 @@ bool Board::isWinner(char token) {
 
 			// verificar posible secuencia diagonal hacia la derecha ( / )
 			if (
+				isColumnInRange(col + 2) && 
+				isRowInRange(row - 2) &&
 				board[row - 1][col + 1] == token &&
 				board[row - 2][col + 2] == token
 			) {
@@ -106,6 +110,8 @@ bool Board::isWinner(char token) {
 
 			// verificar posible secuencia diagonal hacia la izquierda ( \ )
 			if (
+				isColumnInRange(col + 2) &&
+				isRowInRange(row + 2) &&
 				board[row + 1][col + 1] == token &&
 				board[row + 2][col + 2] == token
 			) {

@@ -18,24 +18,25 @@ char Player::getToken() const {
 
 // hacer movida
 void Player::makeMove(Board &board) {
-	int column;
-    int row;
-    bool isRowValid = false;
-    bool isColumnValid = false;
-	bool isTokenAdded = false;
-
     // mostrar mensaje y salir en caso de estar el tablero lleno
     if (board.isFull()) {
         cout << "Tablero ya esta lleno" << endl;
         return;
     }
 
-    // formar etiqueta para pedir fila
-    string label = "Fila (";
-	label += getToken();
-	label += "): ";
+    int column;
+    int row;
+    bool isRowValid = false;
+    bool isColumnValid = false;
+	bool isTokenAdded = false;
+    string label;
 
     while(!isTokenAdded) {
+        // formar etiqueta para pedir fila
+        label = "Fila (";
+        label += getToken();
+        label += "): ";
+
         while(!isRowValid) {
             // pedir y leer fila
             row = Utils::getNumber(label) - 1;
