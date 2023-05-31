@@ -42,7 +42,7 @@ void Player::makeMove(Board &board) {
             isRowValid = board.isRowInRange(row);
 
             if (!isRowValid) {
-                cout << "Fila esta fuera de rango" << endl;
+                cout << "Fila esta fuera de rango\n" << endl;
             }
         }
 
@@ -57,7 +57,7 @@ void Player::makeMove(Board &board) {
             isColumnValid = board.isColumnInRange(column);
 
             if (!isColumnValid) {
-                cout << "Columna esta fuera de rango" << endl;
+                cout << "Columna esta fuera de rango\n" << endl;
             }
         }
         
