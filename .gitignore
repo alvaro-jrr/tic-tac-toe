@@ -31,4 +31,6 @@
 *.out
 *.app
 
+# Personal CodeBlocks related files
 *.depend
+*.layout
