@@ -10,7 +10,6 @@ class Board {
 		static const char EMPTY_CELL = ' ';
 
 		char board[HEIGHT][WIDTH]; // tablero
-        int modality; // numero de modalidad
         
 	public:
 		// constructor
@@ -21,12 +20,6 @@ class Board {
 
         // retornar copia
 		Board copy() const;
-
-        // establecer modalidad
-		void setModality(int);
-
-		// obtener modalidad
-		int getModality() const;
 
 		// obtener alto
 		int getHeight() const;

@@ -20,18 +20,6 @@ Board Board::copy() const {
 	return *this;
 }
 
-// establecer modalidad
-void Board::setModality(int modality) {
-    if (modality >= 1 && modality <= 2) {
-        this->modality = modality;
-    }
-}
-
-// obtener modalidad
-int Board::getModality() const {
-    return modality;
-}
-
 // obtener alto
 int Board::getHeight() const {
 	return HEIGHT;
