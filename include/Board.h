@@ -46,6 +46,9 @@ class Board {
 		// agregar ficha
 		bool addToken(int, int, char);
 
+        // determinar si celda esta tomada
+        bool isCellTaken(int, int);
+
 		// determinar si hay ganador
 		bool isWinner(char);
 

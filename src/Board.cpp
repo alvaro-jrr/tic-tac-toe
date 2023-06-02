@@ -88,6 +88,11 @@ bool Board::addToken(int row, int column, char token) {
 	return true;
 }
 
+// determinar si celda esta tomada
+bool Board::isCellTaken(int row, int col) {
+    return board[row][col] != EMPTY_CELL;
+}
+
 // determinar si hay ganador
 bool Board::isWinner(char token) {
 	int row, col;
