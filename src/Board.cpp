@@ -15,6 +15,23 @@ Board::Board() {
 // destructor
 Board::~Board() { };
 
+// copiar
+Board Board::copy() const {
+	return *this;
+}
+
+// establecer modalidad
+void Board::setModality(int modality) {
+    if (modality >= 1 && modality <= 2) {
+        this->modality = modality;
+    }
+}
+
+// obtener modalidad
+int Board::getModality() const {
+    return modality;
+}
+
 // obtener alto
 int Board::getHeight() const {
 	return HEIGHT;
@@ -126,6 +143,89 @@ bool Board::isWinner(char token) {
 // obtener si juego se ha acabado
 bool Board::isGameOver(char tokenA, char tokenB) {
 	return isWinner(tokenA) || isWinner(tokenB) || isFull();
+}
+
+// obtener puntuacion
+int Board::getScore(char *window, char token) {
+	int score = 0;
+	int tokenCount = 0;
+	int emptyCount = 0;
+	int enemyCount = 0;
+
+	// contar apariciones de ficha, vacio y ficha enemiga
+	for (int i = 0; i < 3; i++) {
+		if (window[i] == token) tokenCount++;
+
+		if (window[i] == EMPTY_CELL) emptyCount++;
+
+		if (window[i] != token && window[i] != EMPTY_CELL) enemyCount++;
+	}
+
+	// mejor puntuacion si gana
+	if (tokenCount == 3) score += 100;
+
+    // si hay 2 fichas propias y 1 es vacio
+	if (tokenCount == 2 && emptyCount == 1) score += 5;
+
+    // si hay 2 fichas enemigas y 1 vacio
+	if (enemyCount == 2 && emptyCount == 1) score -= 5;
+
+    // peor puntuacion si pierde
+	if (enemyCount == 3) score -= 100;
+
+	return score;
+}
+
+// evaluar ficha en el tablero
+int Board::evaluate(char token) {
+	int score = 0;
+	char window[3];
+
+	// puntuacion central
+	for (int row = 0; row < getHeight(); row++) {
+		int centerColumn = getWidth() / 2;
+
+        // si es ficha de jugador se suma 3 a puntuacion
+		if (board[row][centerColumn] == token) score += 3;
+	}
+
+	// puntuacion horizontal
+	for (int row = 0; row < getHeight(); row++) {
+		for (int col = 0; col < getWidth(); col++) {
+			// ir a siguiente columna de la misma fila
+			window[col] = board[row][col];
+		}
+
+		score += getScore(window, token);
+	}
+
+	// puntuacion vertical
+	for (int col = 0; col < getWidth(); col++) {
+		for (int row = 0; row < getHeight(); row++) {
+			// ir a siguiente fila de la misma columna
+			window[row] = board[row][col];
+		}
+
+		score += getScore(window, token);
+	}
+
+	// puntuacion diagonal positiva ( / )
+    for (int row = getHeight() - 1, col = 0; row >= 0 && col < getWidth(); row--, col++) {
+		// subir una fila e ir a siguiente columna
+		window[col] = board[row][col];
+    }
+
+	score += getScore(window, token);
+
+	// puntuacion diagonal negativa ( \ )
+    for (int row = 0, col = 0; row < getHeight() && col < getWidth(); row++, col++) {
+        // bajar una fila e ir a siguiente columna
+		window[row] = board[row][col];
+    }
+
+    score += getScore(window, token);
+
+	return score;
 }
 
 // mostrar

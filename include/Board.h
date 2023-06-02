@@ -10,13 +10,23 @@ class Board {
 		static const char EMPTY_CELL = ' ';
 
 		char board[HEIGHT][WIDTH]; // tablero
-
+        int modality; // numero de modalidad
+        
 	public:
 		// constructor
 		Board();
 
 		// destructor
 		~Board();
+
+        // retornar copia
+		Board copy() const;
+
+        // establecer modalidad
+		void setModality(int);
+
+		// obtener modalidad
+		int getModality() const;
 
 		// obtener alto
 		int getHeight() const;
@@ -41,6 +51,12 @@ class Board {
 
 		// obtener si juego se ha acabado
 		bool isGameOver(char, char);
+
+        // obtener puntuacion
+        int getScore(char *, char);
+
+        // evaluar ficha en el tablero
+		int evaluate(char);
 
 		// mostrar
 		void display() const;
