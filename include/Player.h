@@ -6,6 +6,7 @@
 // clase Jugador
 class Player {
 	private:
+        int score; // puntuacion
 		char token; // ficha
 
 	public:
@@ -16,13 +17,19 @@ class Player {
 		Player(char);
 
 		// destructor
-		~Player() { }
+		virtual ~Player() { }
 
 		// obtener ficha
 		char getToken() const;
 
+        // obtener puntuacion
+		int getScore() const;
+
+		// actualizar puntuacion
+		void setScore(int);
+
 		// hacer movida
-		void makeMove(Board &);
+		virtual void makeMove(Board &) = 0;
 };
 
 #endif

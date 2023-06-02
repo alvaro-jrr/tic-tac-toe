@@ -3,6 +3,8 @@
 #include <vector>
 #include "Board.h"
 #include "Player.h"
+#include "Human.h"
+#include "Computer.h"
 #include "Utils.h"
 using namespace std;
 
@@ -108,8 +110,51 @@ void handleMatch(Board board, Player *P1, Player *P2) {
 
 // controlar juego
 void handleGame() {
+    vector<string> matchTypes = {
+        "Humano vs Humano",
+        "Humano vs Computadora",
+        "Computadora vs Computadora"
+    };
+
+    int matchTypesLength = matchTypes.size();
+
+    // mostrar tipos de partida
+    cout << "> Tipos de Partida\n" << endl;
+    Utils::displayOptions(matchTypes);
+    cout << endl;
+
+    // pedir y leer tipo de partida
+    int matchType = Utils::getOption("Tipo de Partida: ", 1, matchTypesLength);
+    cout << endl;
+
+    // crear elementos
     Board board;
-    Player *P1 = new Player('X'), *P2 = new Player('O');
+    Player *P1, *P2;
+
+    // fichas de jugadores
+    char firstPlayerToken = 'X';
+    char secondPlayerToken = 'O';
+
+    // asignar jugadores de acuerdo a tipo de partida
+    switch(matchType) {
+        case 1:
+            P1 = new Human(firstPlayerToken);
+            P2 = new Human(secondPlayerToken);
+            break;
+
+        case 2:
+            P1 = new Human(firstPlayerToken);
+            P2 = new Computer(secondPlayerToken, firstPlayerToken);
+            break;
+
+        case 3:
+            P1 = new Computer(firstPlayerToken, secondPlayerToken);
+            P2 = new Computer(secondPlayerToken, firstPlayerToken);
+            break;
+
+        default:
+            cout << "Opcion invalida" << endl;
+    }
 
     // iniciar partida
     handleMatch(board, P1, P2);

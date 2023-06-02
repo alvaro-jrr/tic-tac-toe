@@ -35,10 +35,14 @@
 			<Add option="-fexceptions" />
 		</Compiler>
 		<Unit filename="include/Board.h" />
+		<Unit filename="include/Computer.h" />
+		<Unit filename="include/Human.h" />
 		<Unit filename="include/Player.h" />
 		<Unit filename="include/Utils.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/Board.cpp" />
+		<Unit filename="src/Computer.cpp" />
+		<Unit filename="src/Human.cpp" />
 		<Unit filename="src/Player.cpp" />
 		<Unit filename="src/Utils.cpp" />
 		<Extensions />
